@@ -1,6 +1,5 @@
 import { createSlice, current, nanoid } from "@reduxjs/toolkit";
 import { COMMAND_DATA } from "../Constent";
-import { input } from "framer-motion/client";
 
 // Example Initial State
 const initialState = {
@@ -28,12 +27,12 @@ const initialState = {
     // { id: nanoid(), type: "output", command: "about", content: "i am a dev" },
   ],
   Error: [
-    {
-      id: nanoid(),
-      type: "Error",
-      command: null,
-      content: `Command Not found type "help" for Available commadns `,
-    },
+    // {
+    //   id: nanoid(),
+    //   type: "Error",
+    //   command: null,
+    //   content: `Command Not found type "help" for Available commadns `,
+    // },
   ],
 };
 
@@ -44,32 +43,30 @@ const terminalSlice = createSlice({
   // Create Reducers
   reducers: {
     indentifyInput: (state, action) => {
-      const currentCommand = action.payload;
-      console.log(currentCommand);
+      const currentCommand = String(action.payload).toLowerCase().trim()
+
+      console.log(`THIS IS CURRENNTCOMMAND ${currentCommand}`);
 
       const data = COMMAND_DATA[currentCommand];
       console.log(data);
+      if (!data) {
+        console.log("THere is no command");
+      }
 
-      const history = state.Historys.push({ currentCommand, data });
-      console.log(`This is history ${history}`);
+      const existKey = Object.keys(COMMAND_DATA).includes(currentCommand)
+      console.log(`THIS IS EXISTKEY ${existKey}`);
 
-      // let saveData = state.commands.push({
-      //   id: nanoid(),
-      //   type: "input",
-      //   command: currentCommand,
-      // });
-      // state.Historys.push(saveData);
-      console.log(`The length of commands array ${state.commands.length}`);
-      console.log(`The lenght of history: ${state.Historys.length}`);
-
-      // if (currentCommand === "help") {
-      //   state.commands.push({
-      //     id: nanoid(),
-      //     type: "output",
-      //     command: "help",
-      //     content: initialState.commands[0].content,
-      //   });
-      // }
+      if (existKey) {
+        state.Historys.push({ currentCommand, data })
+      } else {
+        state.Error.push({
+          id: nanoid(),
+          type: "Error",
+          command: null,
+          content: `Command Not found Type "help" for avalable command `,
+          bydefault: ``
+        },)
+      }
     },
   },
 });

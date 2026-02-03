@@ -9,7 +9,7 @@ const TermaxTwo = () => {
 
   const dispatch = useDispatch();
 
-  const Commands = useSelector((state) => state.terminalData.commands);
+  const error = useSelector((state) => state.terminalData.Error);
   const history = useSelector((state) => state.terminalData.Historys);
 
   const handlesendData = () => {
@@ -42,6 +42,12 @@ const TermaxTwo = () => {
             ) : null}
           </div>
         ))} */}
+
+        {error.map((err) => (
+          <div key={err.id}>
+            <p>{err.content}</p>
+          </div>
+        ))}
       </div>
       <div>
         {history.map((hist) => (
@@ -56,6 +62,7 @@ const TermaxTwo = () => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           className="bg-red-400 text-white p-2"
+          // required={true}
         />
         <button onClick={handlesendData}>command</button>
       </div>

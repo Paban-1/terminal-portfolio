@@ -12,7 +12,7 @@ export { Intro, Terminal, Navbar, EndScreen, Termax, TermaxTwo, DataRender };
 
 // Imports from lucide react
 import { Loader } from "lucide-react";
-export{Loader}
+export { Loader }
 
 // The Data set for Slice
 const COMMAND_DATA = {
