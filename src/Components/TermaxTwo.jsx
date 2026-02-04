@@ -42,17 +42,17 @@ const TermaxTwo = () => {
             ) : null}
           </div>
         ))} */}
-
-        {error.map((err) => (
-          <div key={err.id}>
-            <p>{err.content}</p>
-          </div>
-        ))}
       </div>
       <div>
         {history.map((hist) => (
           <div key={hist.id}>
             <DataRender key={hist.id} hist={hist} />
+          </div>
+        ))}
+
+        {error.map((err) => (
+          <div key={err.id}>
+            <p>{err.content}</p>
           </div>
         ))}
       </div>
@@ -62,7 +62,7 @@ const TermaxTwo = () => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           className="bg-red-400 text-white p-2"
-          // required={true}
+        // required={true}
         />
         <button onClick={handlesendData}>command</button>
       </div>
